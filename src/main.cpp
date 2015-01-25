@@ -38,8 +38,8 @@ int main()
     typedef const char*(*M)(double, double);
     M m = TestFunction;
 
-    Functor<const char*, TYPELIST_2(double, double) > cmd3(m);
-    cmd3(1.0, 2.0);
+    Functor<std::string, TYPELIST_2(double, double) > cmd3(m);
+    cout << cmd3(1.0, 2.0) << endl;
     return 0;
 }
 
