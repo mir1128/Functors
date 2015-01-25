@@ -1,5 +1,6 @@
 #include "function.h"
 #include <iostream>
+#include <string>
 
 using namespace std;
 
@@ -16,6 +17,12 @@ void functionPointer(int i, int d)
     cout << "functionPointer (" << i << "," << d << ") called." << endl;
 }
 
+const char *TestFunction(double, double)
+{
+    static const char buffer[] = "Hello, world!";
+    return buffer;
+}
+
 int main()
 {
     TestFunctor f;
@@ -27,6 +34,12 @@ int main()
 
     Functor<void, TYPELIST_2(int, int) > cmd2(pf);
     cmd2(1, 2);
+
+    typedef const char*(*M)(double, double);
+    M m = TestFunction;
+
+    Functor<const char*, TYPELIST_2(double, double) > cmd3(m);
+    cmd3(1.0, 2.0);
     return 0;
 }
 
